@@ -3,9 +3,10 @@ package handler
 import (
 	"context"
 	"fmt"
+	"sync/atomic"
+
 	"github.com/rcrowley/go-metrics"
 	"github.com/zakhio/go-metrics-influxdb-grpc-example/proto"
-	"sync/atomic"
 )
 
 var (
@@ -17,11 +18,11 @@ type echoServer struct {
 	counter uint64
 }
 
-func (s *echoServer) Echo(context.Context, *proto.EchoRequest) (*proto.EchoResponse, error) {
+func (s *echoServer) Echo(ctx context.Context, req *proto.EchoRequest) (*proto.EchoResponse, error) {
 	echoCounter.Inc(1)
 	c := atomic.AddUint64(&s.counter, 1)
 
-	return &proto.EchoResponse{Message: fmt.Sprintf("Message #%d", c)}, nil
+	return &proto.EchoResponse{Message: fmt.Sprintf("Message #%d: %v", c, req.Message)}, nil
 }
 
 func NewEchoService() proto.EchoServiceServer {

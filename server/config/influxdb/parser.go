@@ -1,10 +1,12 @@
 package influxdb
 
 import (
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"log"
 	"path/filepath"
 	"time"
+
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
@@ -20,19 +22,19 @@ type Config struct {
 func ParseConfig(filename string) *Config {
 	path, err := filepath.Abs(filename)
 	if err != nil {
-		panic(err)
+		log.Fatalf("did not get the absolute path: %v", err)
 	}
 
 	yamlFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		panic(err)
+		log.Fatalf("could not read file: %v", err)
 	}
 
 	var config Config
 
 	err = yaml.Unmarshal(yamlFile, &config)
 	if err != nil {
-		panic(err)
+		log.Fatalf("could not parse: %v", err)
 	}
 
 	return &config

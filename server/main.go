@@ -1,18 +1,19 @@
 package main
 
 import (
-	"github.com/rcrowley/go-metrics"
-	"github.com/zakhio/go-metrics-influxdb"
-	"github.com/zakhio/go-metrics-influxdb-grpc-example/config/influxdb"
-	"github.com/zakhio/go-metrics-influxdb-grpc-example/handler"
-	"github.com/zakhio/go-metrics-influxdb-grpc-example/proto"
-	"google.golang.org/grpc"
 	"log"
 	"net"
+
+	"github.com/rcrowley/go-metrics"
+	"github.com/zakhio/go-metrics-influxdb"
+	"github.com/zakhio/go-metrics-influxdb-grpc-example/proto"
+	"github.com/zakhio/go-metrics-influxdb-grpc-example/server/config/influxdb"
+	"github.com/zakhio/go-metrics-influxdb-grpc-example/server/handler"
+	"google.golang.org/grpc"
 )
 
 const (
-	port = ":50053"
+	address = ":50053"
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 		influxDBConfig.AlignTimestamps,
 	)
 
-	listener, err := net.Listen("tcp", port)
+	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
