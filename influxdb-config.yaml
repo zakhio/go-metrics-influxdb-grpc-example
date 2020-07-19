@@ -1,0 +1,7 @@
+url: "http://localhost:8086"
+organizationId: "organizationId"
+bucketId: "localBucketId"
+token: "access token"
+measurement: "measurement"
+interval: "10s" # reporting interval
+alignTimestamps: true # round timestamps to interval
