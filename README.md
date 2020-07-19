@@ -6,27 +6,30 @@ exported to [InfluxDB](https://influxdb.com/) instance running in [Docker](https
 [go-metrics-influxdb](https://github.com/zakhio/go-metrics-influxdb) reporter.
 
 Prerequisites:
-* Protocol Buffer Compiler, [protoc installation](https://grpc.io/docs/protoc-installation/)
-* Docker Compose, [docker-compose installation](https://docs.docker.com/compose/install/)
+* Protocol Buffer Compiler (see [protoc installation](https://grpc.io/docs/protoc-installation/)).
+* Docker Compose (see [docker-compose installation](https://docs.docker.com/compose/install/)).
 
 Usage
 -----
 
-Generate golang code from proto definitions. The script will download and install `protoc-gen-go` and `protoc-gen-go-grpc`.
+Generate golang code from proto definitions:
 ```shell
 ./generate-proto.sh
 ```
+_Note: The script will download and install `protoc-gen-go` and `protoc-gen-go-grpc`._
 
-Start InfluxDB and Chronograf. 
+Start InfluxDB and Chronograf:
 ```shell
 docker-compose up -d
 ```
+_Note: `localBucketId` database and `Chronograf` are preconfigured_
 
-Client and server available by next command. 
-```
+Server and client available by the next commands: 
+```shell
 go run server/main.go
 go run client/main.go
 ```
+_Run them in different terminals._
 
 Echo Calls Rate in Chronograf  
 -----------------------------

@@ -18,13 +18,15 @@ type echoServer struct {
 	counter uint64
 }
 
-func (s *echoServer) Echo(ctx context.Context, req *proto.EchoRequest) (*proto.EchoResponse, error) {
+//Echo sends back message from the request and its number
+func (s *echoServer) Echo(_ context.Context, req *proto.EchoRequest) (*proto.EchoResponse, error) {
 	echoCounter.Inc(1)
-	c := atomic.AddUint64(&s.counter, 1)
+	count := atomic.AddUint64(&s.counter, 1)
 
-	return &proto.EchoResponse{Message: fmt.Sprintf("Message #%d: %v", c, req.Message)}, nil
+	return &proto.EchoResponse{Message: fmt.Sprintf("Message #%d: %v", count, req.Message)}, nil
 }
 
+//NewEchoService instantiate new echo server object
 func NewEchoService() proto.EchoServiceServer {
 	server := &echoServer{}
 	return server

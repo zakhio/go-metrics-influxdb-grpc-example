@@ -19,8 +19,9 @@ type Config struct {
 	AlignTimestamps bool          `yaml:"alignTimestamps"`
 }
 
-func ParseConfig(filename string) *Config {
-	path, err := filepath.Abs(filename)
+//ParseConfig parses configuration file and returns corresponding object
+func ParseConfig(configPath string) *Config {
+	path, err := filepath.Abs(configPath)
 	if err != nil {
 		log.Fatalf("did not get the absolute path: %v", err)
 	}
