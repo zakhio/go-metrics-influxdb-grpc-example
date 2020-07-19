@@ -22,6 +22,7 @@ func main() {
 	defer conn.Close()
 	client := proto.NewEchoServiceClient(conn)
 
+	fmt.Println("Send message to EchoService (For exit send empty string).")
 	for {
 		var msg string
 		fmt.Print("> ")
