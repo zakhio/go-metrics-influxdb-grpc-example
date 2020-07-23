@@ -9,7 +9,7 @@ go install github.com/golang/protobuf/protoc-gen-go
 echo "clone or update github.com/grpc/grpc-go"
 test -d "tmp/grpc-go" \
   && (cd $GRPC_GO_PATH && git pull origin $GRPC_GO_VERSION && true) \
-  || git clone -b $GRPC_GO_VERSION https://github.com/grpc/grpc-go $GRPC_GO_PATH
+  || git clone --depth 1 -b $GRPC_GO_VERSION https://github.com/grpc/grpc-go $GRPC_GO_PATH
 
 echo "go install grpc-go/cmd/protoc-gen-go-grpc"
 (cd $GRPC_GO_PATH/cmd/protoc-gen-go-grpc && go install .)
